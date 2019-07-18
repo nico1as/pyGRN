@@ -21,7 +21,9 @@ class Evolution:
         self.generation = 0
 
     def step(self):
+        #print("....evaluate")
         self.population.evaluate(self.problem)
+        #print("....speciation")
         self.population.speciation()
         self.population.adjust_thresholds()
         self.population.set_offspring_count()
@@ -32,7 +34,10 @@ class Evolution:
 
     def run(self, generations):
         for gen in range(generations):
+            print("..Generation:", gen)
             self.step()
+            best_fit, best_ind = self.population.get_best()
+            print("....Best Fitness:", best_fit)
         best_fit, best_ind = self.population.get_best()
         return best_fit, best_ind
 

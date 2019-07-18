@@ -3,6 +3,7 @@ from pygrn.evolution import mutate_modify, mutate, crossover
 from pygrn import config
 import numpy as np
 import random
+import time 
 
 
 class Population:
@@ -27,8 +28,11 @@ class Population:
             self.offspring += [Individual(g)]
 
     def evaluate(self, problem):
+        print(len(self.offspring))
         for ind in self.offspring:
+            #start_time = time.time()
             fit = ind.get_fitness(problem)
+            #print("--- %s seconds get_fitness ---" % (time.time() - start_time))
             if fit < self.fit_min:
                 self.fit_min = fit
             if fit > self.fit_max:
